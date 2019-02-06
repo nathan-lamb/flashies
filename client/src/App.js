@@ -18,7 +18,7 @@ class App extends Component {
       <Container className='app'>
         <Header as='h1' block inverted color='olive' content='Flashies' />
         <Segment className='main-interface'>
-          <NewCard />
+          {this.state.cards.length !== 0 ? <ReviewCards cards={this.state.cards} /> : null}
         </Segment>
       </Container>
     )
