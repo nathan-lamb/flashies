@@ -5,6 +5,14 @@ import './App.css'
 import NewCard from './components/NewCard';
 
 class App extends Component {
+  componentDidMount() {
+    fetch('/cards', {
+      accept: 'application/json',
+    })
+      .then(response => response.json())
+      .then(cards => this.setState({ cards }))
+  }
+
   render() {
     return (
       <Container className='app'>
