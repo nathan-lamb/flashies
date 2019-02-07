@@ -13,7 +13,7 @@ class App extends Component {
       cards: []
     }
 
-    this.removeCorrectAnswer = this.removeCorrectAnswer.bind(this)
+    this.handleRemoveCorrectAnswer = this.handleRemoveCorrectAnswer.bind(this)
   }
 
   componentDidMount() {
@@ -24,7 +24,7 @@ class App extends Component {
       .then(cards => this.setState({ cards }))
   }
 
-  removeCorrectAnswer(currentCardIndex) {
+  handleRemoveCorrectAnswer(currentCardIndex) {
     let currentCardList = this.state.cards.slice()
     currentCardList.splice(currentCardIndex, 1)
 
@@ -39,6 +39,8 @@ class App extends Component {
         <Header as='h1' block inverted color='olive' content='Flashies' />
         <Segment className='main-interface'>
           {this.state.cards.length !== 0 ? <ReviewCards cards={this.state.cards} removeCorrectAnswer={this.removeCorrectAnswer} /> : null}
+          {this.state.cards.length !== 0 ? <ReviewCards cards={this.state.cards} removeCorrectAnswer={this.handleRemoveCorrectAnswer} /> : null}
+        </Segment>
         </Segment>
       </Container>
     )

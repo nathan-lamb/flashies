@@ -33,7 +33,7 @@ class ReviewCards extends Component {
     }
 
     handleCorrectAnswer() {
-        this.props.removeCorrectAnswer(this.state.currentCardIndex)
+        this.props.handleRemoveCorrectAnswer(this.state.currentCardIndex)
 
         if (this.state.currentCardIndex + 1 >= this.props.cards.length) {
             this.setState({
