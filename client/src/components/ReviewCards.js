@@ -1,8 +1,4 @@
 import React, { Component } from 'react'
-// import _ from 'lodash'
-// import { Button } from 'semantic-ui-react'
-
-import cards from '../data'
 
 import QuestionCard from './QuestionCard'
 import AnswerCard from './AnswerCard';
@@ -11,24 +7,62 @@ class ReviewCards extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            currentCard: cards[0],
-            checkAnswer: false
+            currentCardIndex: 0,
+            checkAnswer: false,
         }
 
         this.handleCheckAnswer = this.handleCheckAnswer.bind(this)
+        this.handleIncorrectAnswer = this.handleIncorrectAnswer.bind(this)
+        this.handleCorrectAnswer = this.handleCorrectAnswer.bind(this)
     }
 
     handleCheckAnswer() {
+        if (!this.state.checkAnswer) {
+            this.setState({
+                checkAnswer: true
+            })
+        }
+    }
+
+    handleIncorrectAnswer() {
+        this.showNextCard()
+
         this.setState({
-            checkAnswer: true
+            checkAnswer: false
+        })
+    }
+
+    handleCorrectAnswer() {
+        this.props.removeCorrectAnswer(this.state.currentCardIndex)
+
+        if (this.state.currentCardIndex + 1 >= this.props.cards.length) {
+            this.setState({
+                currentCardIndex: 0,
+                checkAnswer: false
+            })
+        } else {
+            this.setState({
+                checkAnswer: false
+            })
+        }
+    }
+
+    showNextCard() {
+        let currentCardIndex = 0
+
+        if (this.state.currentCardIndex + 1 < this.props.cards.length) {
+            currentCardIndex = this.state.currentCardIndex + 1
+        }
+
+        this.setState({
+            currentCardIndex
         })
     }
 
     render() {
         return (
             <div onClick={this.handleCheckAnswer}>
-                <QuestionCard currentCard={this.state.currentCard} />
-                {this.state.checkAnswer ? <AnswerCard currentCard={this.state.currentCard} /> : null}
+                {this.state.checkAnswer ? <AnswerCard currentCard={this.props.cards[this.state.currentCardIndex]} handleIncorrectAnswer={this.handleIncorrectAnswer} handleCorrectAnswer={this.handleCorrectAnswer} /> : <QuestionCard currentCard={this.props.cards[this.state.currentCardIndex]} />}
             </div>
         )
     }

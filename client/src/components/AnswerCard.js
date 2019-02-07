@@ -2,16 +2,20 @@ import React from 'react'
 
 import { Button, Segment } from 'semantic-ui-react'
 
-const AnswerCard = (props) => {
-    return (
-        <div>
-            <Segment textAlign='center'>{props.currentCard.back}</Segment>
-            <Button.Group fluid>
-                <Button icon='check' />
-                <Button icon='x' />
-            </Button.Group>
-        </div>
-    )
+class AnswerCard extends React.Component {
+
+    render() {
+        return (
+            <div>
+                <Segment textAlign='center'>{this.props.currentCard.front}</Segment>
+                <Segment textAlign='center'>{this.props.currentCard.back}</Segment>
+                <Button.Group fluid>
+                    <Button icon='check' onClick={this.props.handleCorrectAnswer} />
+                    <Button icon='x' onClick={this.props.handleIncorrectAnswer} />
+                </Button.Group>
+            </div>
+        )
+    }
 }
 
 export default AnswerCard
