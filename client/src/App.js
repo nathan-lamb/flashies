@@ -3,7 +3,7 @@ import { Container, Header, Segment } from 'semantic-ui-react'
 // import _ from 'lodash'
 
 import './App.css'
-// import NewCard from './components/NewCard'
+import NewCard from './components/NewCard'
 import ReviewCards from './components/ReviewCards'
 
 class App extends Component {
@@ -38,9 +38,10 @@ class App extends Component {
       <Container className='app'>
         <Header as='h1' block inverted color='olive' content='Flashies' />
         <Segment className='main-interface'>
-          {this.state.cards.length !== 0 ? <ReviewCards cards={this.state.cards} removeCorrectAnswer={this.removeCorrectAnswer} /> : null}
           {this.state.cards.length !== 0 ? <ReviewCards cards={this.state.cards} removeCorrectAnswer={this.handleRemoveCorrectAnswer} /> : null}
         </Segment>
+        <Segment className='main-interface'>
+          <NewCard />
         </Segment>
       </Container>
     )
