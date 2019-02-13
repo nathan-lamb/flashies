@@ -8,19 +8,20 @@ const knex = require('knex')(knexfile.development)
 
 app.use(bodyParser.json())
 
-app.get('/cards', function (req, res) {
-    knex.select().from('default_deck').then(cards => {
-        res.send(cards);
-    })
+app.get('/cards', (req, res) => {
+    knex.select()
+        .from('default_deck')
+        .then(cards => {
+            res.send(cards);
+        })
 })
 
 app.post('/add', (req, res) => {
-    console.log(req.body)
-    knex('default_deck').insert({
-        front: req.body.front,
-        back: req.body.back
-    })
-        .then(() => { })
+    knex('default_deck')
+        .insert({
+            front: req.body.front,
+            back: req.body.back
+        })
 })
 
 app.listen(process.env.PORT || 8080);
