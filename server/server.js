@@ -10,9 +10,11 @@ app.use(bodyParser.json())
 
 app.get('/cards', (req, res) => {
     knex.select()
-        .from('default_deck')
-        .then(cards => {
-            res.send(cards);
+        .from('defalt_deck')
+        .then(cards => res.send(cards))
+        .catch(err => {
+            console.error(err)
+            res.status(500).send(err)
         })
 })
 

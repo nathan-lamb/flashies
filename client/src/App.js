@@ -20,8 +20,16 @@ class App extends Component {
     fetch('/cards', {
       accept: 'application/json',
     })
+      .then(response => {
+        if (!response.ok) {
+          throw Error(response.statusText)
+        } else {
+          return response
+        }
+      })
       .then(response => response.json())
       .then(cards => this.setState({ cards }))
+      .catch(err => console.log(err))
   }
 
   handleRemoveCorrectAnswer(currentCardIndex) {
